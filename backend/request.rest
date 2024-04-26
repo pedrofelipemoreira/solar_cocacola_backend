@@ -1,15 +1,3 @@
-POST http://localhost:3000/clients/create
+POST http://localhost:3000/clients/register
 Content-Type: application/json
 
-{
-    "category": "bar",
-    "name": "Claudio Antônio Silva",
-    "cep": "54320-060",
-    "uf": "PE",
-    "cidade": "Recife",
-    "bairro": "Boa Viagem",
-    "logradouro": "Av. Boa viagem, 401",
-    "tpCliente": "Bronze",
-    "cnpj": "21.581.083/0001-20"
-
-}

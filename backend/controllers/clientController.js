@@ -42,8 +42,24 @@ const ClientController = {
             console.log(error)
 
         }
-    }
+    },
+
+    showClient: async (req, res) =>{
+
+        try{
+
+            const Clients = await ClientModel.find().sort('-createdAt')
+
+            res.status(200).json({clients:Clients})
+
+        }catch(error){
+
+            console.log(error)
+
+        }
+       
+    }, 
 
 }
 
-export default ClientController;
+export default ClientController; 
