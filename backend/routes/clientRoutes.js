@@ -9,6 +9,12 @@ router.route('/create')
 router.route('/')
 .get((req, res) => clientController.showClient(req, res));
 
+router.route('/:id')
+.get((req, res) => clientController.getClientById(req, res))
+
+router.route('/:id')
+.delete(/* verifyToken, */(req, res) => clientController.removeClientById(req, res));
+
 
 export default router;
 

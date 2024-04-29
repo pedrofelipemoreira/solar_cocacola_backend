@@ -1,3 +1,4 @@
+import { isValidObjectId } from 'mongoose';
 import { Client } from '../models/Client.js';
 
 import { response } from 'express';
@@ -59,6 +60,65 @@ const ClientController = {
         }
        
     }, 
+
+    getClientById: async(req, res) =>{
+
+        try{
+
+            const id = req.params.id
+
+            if(!isValidObjectId(id)){
+                res.status(422).json({message: 'Id Invalido'});
+                return; 
+            }
+
+            const client = await ClientModel.findById(id);
+
+            if(!client){
+                res.status(404).json({message: 'Cliente não encotrado'});
+                return; 
+            }
+
+            res.status(200).json({client});
+
+        }catch(error){
+
+            console.log(error);
+
+        }
+
+
+    },
+
+    removeClientById: async(req, res) => {
+
+        try{
+
+            const id = req.params.id;
+
+            if(!isValidObjectId(id)){
+                res.status(422).json({message: 'Id Invalido'});
+                return; 
+            }
+
+            const client = await ClientModel.findById(id);
+
+            if(!client){
+                res.status(404).json({message: 'Cliente não encotrado'});
+                return; 
+            }
+
+            const deleteClient = await ClientModel.findByIdAndDelete(id);
+
+            res.status(200).json({deleteClient, msg:"Cliente Deletado com sucesso"})
+
+        }catch(error){
+
+            console.log(error);
+
+        }
+
+    },
 
 }
 
