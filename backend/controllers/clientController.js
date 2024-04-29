@@ -174,6 +174,43 @@ const ClientController = {
 
     },
 
+    editClientUpdate: async(req, res) =>{
+
+        try{
+
+            const id = req.params.id;
+
+            const client = {
+                category: req.body.category,
+                name: req.body.name,
+                cep: req.body.cep,
+                uf: req.body.uf,
+                cidade: req.body.cidade,
+                bairro: req.body.bairro,
+                logradouro: req.body.logradouro,
+                tpCliente: req.body.tpCliente,
+                cnpj: req.body.cnpj,
+            };
+
+            const updateClient = await ClientModel.findByIdAndUpdate(id, client);
+
+            if(!updateClient){
+                res.status(404).json({message: 'Cliente não encotrado'});
+                return; 
+            }
+
+            res.status(200).json({client, msg:"Cliente Atualizado com sucesso"})
+
+
+
+        }catch(error){
+
+            console.log(error);
+
+        }
+
+    },
+
 }
 
 export default ClientController; 

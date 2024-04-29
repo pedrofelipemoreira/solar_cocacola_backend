@@ -15,6 +15,9 @@ router.route('/:id')
 router.route('/:id')
 .delete(/* verifyToken, */(req, res) => clientController.removeClientById(req, res));
 
+router.route('/edit/:id')
+.put((req, res) => clientController.editClientUpdate(req, res));
+
 
 export default router;
 
