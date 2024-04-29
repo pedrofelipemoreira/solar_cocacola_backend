@@ -10,35 +10,89 @@ const ClientController = {
     create: async (req, res) => {
         try {
 
-            const client = {
-                
-                category: req.body.category,
-                
-                name: req.body.name,
-                
-                cep: req.body.cep,
-                
-                uf: req.body.uf,
-                
-                cidade: req.body.cidade,
-                
-                bairro: req.body.bairro,
-                
-                logradouro: req.body.logradouro,
-                
-                tpCliente: req.body.tpCliente,
-                
-                cnpj: req.body.cnpj,
+            const {category, name, cep, uf, cidade, bairro, logradouro, tpCliente, cnpj} = req.body
+
+            if(!category){
+                res.status(422).json({message: 'A Categoria é obrigatória'});
+                return;
             }
 
-            console.log(client);
+            if(!name){
+                res.status(422).json({message: 'O Nome é obrigatório'});
+                return;
+            }
 
-            const response = await ClientModel.create(client);
+            if(!cep){
+                res.status(422).json({message: 'O CEP é obrigatório'});
+                return;
+            }
 
-            res.status(201).json({response, msg:"Cliente Criado com sucesso"})
+            if(!uf){
+                res.status(422).json({message: 'A UF é obrigatória'});
+                return;
+            }
+
+            if(!cidade){
+                res.status(422).json({message: 'A Cidade é obrigatória'});
+                return;
+            }
+
+            if(!bairro){
+                res.status(422).json({message: 'O Bairro é obrigatório'});
+                return;
+            }
+
+            if(!logradouro){
+                res.status(422).json({message: 'O Logradouro é obrigatório'});
+                return;
+            }
+
+            if(!tpCliente){
+                res.status(422).json({message: 'O Tipo Cliente é obrigatório'});
+                return;
+            }
+
+            if(!cnpj){
+                res.status(422).json({message: 'O CNPJ é obrigatório'});
+                return;
+            }
+
+            const ClientExist = await ClientModel.findOne({cnpj: cnpj})
+
+            if(ClientExist){
+                res.status(422).json({message: 'CNPJ já cadastrado'});
+                return;
+            }
+
+            const client = new ClientModel({
+                category,
+                name,
+                cep,
+                uf,
+                cidade,
+                bairro,
+                logradouro,
+                tpCliente,
+                cnpj,
+            });
 
 
-        } catch (error) {
+
+            try{
+                
+                const newClient = await client.save();
+
+                res.status(201).json({newClient, msg:"Cliente Criado com sucesso"})
+
+            }catch(error){
+                
+                res.status(500).json({message: error})
+            
+            }
+
+
+
+        } catch (error) { 
 
             console.log(error)
 
