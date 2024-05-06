@@ -1,13 +1,32 @@
+import api from "../../utils/api";
+import { useState, useEffect } from 'react';
+
+
 function Home (){
+
+    const [clients, setClients] = useState([]);
+
+    useEffect(() => {
+        api.get('/clients').then((response) => {
+            setClients(response.data.clients);
+        })
+    }, [])
+
+
 
     return(
         <section>
 
-            <h1> Home </h1>
+            {clients.map((client) => (
+                <div>
+                    <h1>{client.name}</h1>
+                </div>
+            ))}
 
         </section>
 
     )
+
 
 }
 
