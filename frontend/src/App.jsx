@@ -1,0 +1,46 @@
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
+//Componentes
+import Navbar from './components/layout/Navbar';
+import Footer from './components/layout/Footer';
+import Container from './components/layout/Container';
+
+
+
+//Pages
+import CreateClient from './components/pages/CreateClient';
+import Clients from './components/pages/Clients';
+import Home from './components/pages/Home';
+
+
+
+function App() {
+
+  return (
+
+    <Router>
+
+      <Navbar />
+
+      <Container>
+
+        <Routes>
+
+          <Route path='/createClient' element={<CreateClient />} > </Route>
+
+          <Route path='/Clients' element={<Clients />} ></Route>
+
+          <Route path='/' element={<Home />} ></Route>
+
+        </Routes>
+
+      </Container>
+
+      <Footer />
+
+    </Router>
+
+  )
+}
+
+export default App
