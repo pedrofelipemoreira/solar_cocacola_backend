@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
 import Container from './components/layout/Container';
-
+import Message from './components/layout/Message';
 
 
 //Pages
@@ -21,6 +21,8 @@ function App() {
     <Router>
 
       <Navbar />
+
+      <Message/>
 
       <Container>
 
