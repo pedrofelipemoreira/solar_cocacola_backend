@@ -8,14 +8,14 @@ import Message from './components/layout/Message';
 
 
 //Pages
-import CreateClient from './components/pages/CreateClient';
-import Clients from './components/pages/Clients';
+import CreateClient from './components/pages/Client/CreateClient';
+import Clients from './components/pages/Client/Clients';
 import Home from './components/pages/Home';
 
 
 
 function App() {
-
+ 
   return (
 
     <Router>

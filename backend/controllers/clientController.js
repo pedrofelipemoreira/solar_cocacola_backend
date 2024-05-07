@@ -164,7 +164,7 @@ const ClientController = {
 
             const deleteClient = await ClientModel.findByIdAndDelete(id);
 
-            res.status(200).json({deleteClient, msg:"Cliente Deletado com sucesso"})
+            res.status(200).json({deleteClient, message:"Cliente Deletado com sucesso"})
 
         }catch(error){
 

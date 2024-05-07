@@ -1,14 +1,14 @@
-import Input from "../form/input.jsx";
-import styles from "../form/form.module.css"
+import Input from "../../form/input.jsx";
+import styles from "../../form/form.module.css"
 
 import { useState, useContext } from 'react';
 
-import useCleint from "../../hooks/useClient.jsx";
+import addClient from "../Client/AddClient.jsx";
 
 function CreateClient() {
 
     const [client, setClient] = useState({});
-    const {register} = useCleint();
+    const {register} = addClient();
 
     function handleChange(e) {
 
