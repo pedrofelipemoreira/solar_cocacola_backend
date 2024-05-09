@@ -11,7 +11,7 @@ import Message from './components/layout/Message';
 import CreateClient from './components/pages/Client/CreateClient';
 import Clients from './components/pages/Client/Clients';
 import Home from './components/pages/Home';
-
+import EditClient from './components/pages/Client/EditClient';
 
 
 function App() {
@@ -33,6 +33,8 @@ function App() {
           <Route path='/Clients' element={<Clients />} ></Route>
 
           <Route path='/' element={<Home />} ></Route>
+
+          <Route path='/Client/edit/:id' element={<EditClient/>}></Route>
 
         </Routes>
 

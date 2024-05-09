@@ -5,6 +5,11 @@ import './Clients.css'; // Importe o arquivo de estilo
 import addClient from "../Client/AddClient.jsx";
 
 
+import { Link } from 'react-router-dom';
+
+
+
+
 function Clients() {
 
     const [clients, setClients] = useState([]);
@@ -74,7 +79,7 @@ function Clients() {
             key: 'action',
             render: (_, record) => (
                 <Space size="middle">
-                    <a>Editar {record.cod}</a>
+                    <Link to={`/Client/edit/${record._id}`}>Editar</Link>
                     <a onClick={() => {
                         removeClient(record._id, clients)
                         console.log(record._id)

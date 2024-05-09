@@ -19,7 +19,7 @@ function Home (){
 
             {clients.map((client) => (
                 <div>
-                    <h1>{client.name}</h1>
+                    <h1>Home</h1>
                 </div>
             ))}
 
