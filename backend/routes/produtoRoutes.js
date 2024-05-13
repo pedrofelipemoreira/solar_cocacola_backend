@@ -7,6 +7,6 @@ router.route('/create')
 .post((req, res) => produtoController.create(req, res));
 
 router.route('/')
-.get((req, res) => produtoController.showProduto(req, res));
+.get((req, res) => produtoController.showProduto(req, res)); 
 
 export default router;
