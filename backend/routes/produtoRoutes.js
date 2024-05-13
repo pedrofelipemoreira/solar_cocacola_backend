@@ -12,4 +12,10 @@ router.route('/')
 router.route('/:id')
 .get((req, res) => produtoController.getProdutoById(req, res));
 
+router.route('/:id')
+.delete( /* verifyToken, */ (req, res) => produtoController.removeProdutoById(req, res));
+
+router.route('/edit/:id')
+.put((req, res) => produtoController.editProdutoUpdate(req, res));
+
 export default router;

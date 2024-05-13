@@ -199,7 +199,7 @@ const ClientController = {
                 return; 
             }
 
-            res.status(200).json({client, msg:"Cliente Atualizado com sucesso"})
+            res.status(200).json({client, msg:"Cliente Atualizado com sucesso"});
 
 
 

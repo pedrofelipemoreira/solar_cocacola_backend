@@ -131,6 +131,68 @@ const PodutoController = {
 
         }
 
+    },
+
+    removeProdutoById: async(req, res) =>{
+        try{
+
+            const id = req.params.id
+            
+            if(!isValidObjectId(id)){
+                res.status(422).json({message: 'Id Invalido'});
+                return; 
+            }
+
+            const produto = await ProdutoModel.findById(id);
+
+            if(!produto){
+                res.status(404).json({message: 'Produto não encontrado'})
+                return;
+            }
+
+            const deleteProduto = await ProdutoModel.findByIdAndDelete(id)
+
+            res.status(200).json({deleteProduto, message: "Produto Deletado com sucesso"})
+
+
+        }catch (error){
+
+            console.log(error);
+
+        }
+    },
+
+    editProdutoUpdate: async(req, res) =>{
+        
+        try{
+
+            const id = req.params.id
+
+            const produto = {
+                cod: req.body.cod, 
+                category: req.body.category,
+                descricao: req.body.decricao, 
+                ml: req.body.ml, 
+                regiao: req.body.regiao, 
+                tpCliente: req.body.tpCliente, 
+                valor: req.body.valor,
+            }
+
+            const updateProduto = await ProdutoModel.findByIdAndUpdate(id, produto)
+
+            if(!updateProduto){
+                res.status(404).json({message: 'Produto não encotrado'});
+                return; 
+            }
+
+            res.status(200).json({produto, msg:"Produto Atualizado com sucesso"});
+
+
+        }catch(error){
+
+            console.log(error)
+
+        }
     }
 
 }
