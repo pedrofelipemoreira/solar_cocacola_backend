@@ -1,0 +1,108 @@
+import { isValidObjectId } from "mongoose";
+import {Produto} from '../models/Produtos.js'
+
+const ProdutoModel = Produto
+
+const PodutoController = {
+
+    create: async (req, res) =>{
+
+        try{
+
+            const {cod, category, descricao, ml, regiao, tpCliente, valor} = req.body
+
+            if(!cod){
+                res.status(422).json({message: 'O Código é obrigatório'});
+                return;
+            }
+
+            if(!category){
+                res.status(422).json({message: 'A Categoria é obrigatória'});
+                return;
+            }
+            
+            if(!descricao){
+                res.status(422).json({message: 'A Descrição é obrigatória'});
+                return;
+            }
+            
+            if(!ml){
+                res.status(422).json({message: 'O ML é obrigatória'});
+                return;
+            }
+
+            if(!regiao){
+                res.status(422).json({message: 'A Região é obrigatória'});
+                return;
+            }
+
+            if(!tpCliente){
+                res.status(422).json({message: 'O Tipo Cliente é obrigatório'});
+                return;
+            }
+            
+            if(!valor){
+                res.status(422).json({message: 'O Valor é obrigatório'});
+                return;
+            }
+
+            const ProdutoExist = await ProdutoModel.findOne({cod: cod})
+
+            if(ProdutoExist){
+                res.status(422).json({message: 'Código já cadastrado'});
+                return;
+            }
+
+            const produto = new ProdutoModel({
+                cod, 
+                category,
+                descricao, 
+                ml, 
+                regiao, 
+                tpCliente, 
+                valor
+            });
+
+            try{
+
+                const newProduto = await produto.save()
+
+                res.status(201).json({newProduto, message:"Prodduto Criado com sucesso"})
+
+
+            }catch(error){
+
+                res.status(500).json({message: error})
+
+            }
+
+
+
+        }catch (error){
+
+
+            res.status(500).json({message: error})
+            console.log(error);
+        }
+
+    },
+
+    showProduto: async (req, res) => {
+
+        try{
+
+            const Produtos = await ProdutoModel.find().sort('-createdAt')
+            
+            res.status(200).json({produtos: Produtos})
+
+        }catch(error){
+
+            console.log(error)
+
+        }
+
+    }
+
+}
+
+export default PodutoController;
