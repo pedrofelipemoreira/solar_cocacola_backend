@@ -9,4 +9,7 @@ router.route('/create')
 router.route('/')
 .get((req, res) => produtoController.showProduto(req, res)); 
  
+router.route('/:id')
+.get((req, res) => produtoController.getProdutoById(req, res));
+
 export default router;

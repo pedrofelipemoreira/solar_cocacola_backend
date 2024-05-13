@@ -101,6 +101,36 @@ const PodutoController = {
 
         }
 
+    },
+
+    getProdutoById: async(req, res) => {
+
+        try{
+
+            const id = req.params.id
+            
+            if(!isValidObjectId(id)){
+                res.status(422).json({message: 'Id Invalido'});
+                return; 
+            }
+
+            const produto = await ProdutoModel.findById(id);
+
+            if(!produto){
+                res.status(404).json({message: 'Produto não encontrado'})
+                return;
+            }
+
+
+            res.status(200).json({produto});
+
+
+        }catch(error){
+
+            console.log(error)
+
+        }
+
     }
 
 }
